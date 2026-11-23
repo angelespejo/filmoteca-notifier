@@ -1,4 +1,4 @@
-FROM node:24-alpine AS base
+FROM node:26-alpine AS base
 RUN corepack enable && corepack prepare pnpm@12.21.0 --activate
 WORKDIR /app
 
@@ -23,7 +23,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile --prod
 
 # ---------- runtime ----------
-FROM node:24-alpine AS runtime
+FROM node:26-alpine AS runtime
 RUN apk add --no-cache dumb-init
 
 ENV NODE_ENV=production
