@@ -1,0 +1,62 @@
+{
+  "name": "filmoteca-notifier",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.9.0",
+    "pnpm": ">=11.0.0"
+  },
+  "author": {
+    "name": "Angelo",
+    "email": "angelo@pigeonposse.com",
+    "url": "https://github.com/angelespejo"
+  },
+  "scripts": {
+    "security:audit": "pnpm audit --audit-level=high",
+    "start": "node --env-file-if-exists=.env --import tsx src/index.ts server",
+    "scrape": "node --env-file-if-exists=.env --import tsx src/index.ts manual",
+    "ask": "node --env-file-if-exists=.env --import tsx src/index.ts ask",
+    "cli:help": "node --import tsx src/index.ts --help",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "pnpm clean && tsc",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.test.json && tsc -p tsconfig.scripts.json",
+    "test": "node --import tsx --test test/*.test.ts",
+    "test:watch": "node --import tsx --test --watch test/*.test.ts",
+    "bench:scrape": "node --import tsx scripts/bench-scrape.ts",
+    "lint": "oxlint --deny-warnings",
+    "lint:fix": "oxlint --fix",
+    "push": "node .dovenv/push.ts"
+  },
+  "dependencies": {
+    "node-cron": "4.6.0",
+    "node-html-parser": "9.0.7",
+    "nodemailer": "10.6.1"
+  },
+  "devDependencies": {
+    "@release-it/bumper": "~8.0.1",
+    "@types/node": "26.6.6",
+    "@types/node-cron": "3.0.11",
+    "@types/nodemailer": "8.0.2",
+    "auto-changelog": "~2.7.0",
+    "oxlint": "~1.94.0",
+    "prettier": "~3.10.1",
+    "release-it": "21.1.3",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  },
+  "packageManager": "pnpm@12.21.0",
+  "homepage": "https://github.com/angelespejo/filmoteca-notifier",
+  "bugs": {
+    "url": "https://github.com/angelespejo/filmoteca-notifier/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angelespejo/filmoteca-notifier"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/angelespejo"
+  }
+}

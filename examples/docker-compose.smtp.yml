@@ -1,0 +1,25 @@
+services:
+
+  mailpit:
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
+  filmoteca:
+    build: ../.
+    restart: unless-stopped
+    environment:
+      TZ: Europe/Madrid
+      CRON: 0 17 * * *
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
+      SMTP_USER: ""
+      SMTP_PASS: ""
+      EMAIL_FROM: filmoteca@example.com
+      EMAIL_TO: "${EMAIL_TO:-user@example.com}"
+      GOTIFY_URL: ""
+      GOTIFY_TOKEN: ""
+    depends_on:
+      - mailpit

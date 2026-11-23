@@ -1,0 +1,11 @@
+services:
+  filmoteca:
+    build: .
+    restart: unless-stopped
+    stop_grace_period: 30s
+    env_file:
+      - .env
+    environment:
+      TZ: Europe/Madrid
+    volumes:
+      - ./data:/app/data
